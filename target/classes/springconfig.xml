@@ -2,12 +2,26 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-                            http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+                            http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+                             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
     <!-- 加载外部属性配置文件 -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!--开启包的扫描-->
+    <context:component-scan base-package="union"></context:component-scan>
+<!--    &lt;!&ndash;开启自动代理&ndash;&gt;-->
+<!--    <aop:aspectj-autoproxy proxy-target-class="true"/>-->
+    <!--配置事务注解驱动-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="myDataSource"/>
+    </bean>
+
     <!-- 声明数据源DataSource -->
     <bean id="myDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${forname}"/>
         <property name="url" value="${url}"/>
         <property name="username" value="${user}"/>
         <property name="password" value="${password}"/>
@@ -32,6 +46,4 @@
         <!-- 指定基本包，dao接口所在的包名 -->
         <property name="basePackage" value="union.dao"/>
     </bean>
-    <!--开启包的扫描-->
-    <context:component-scan base-package="com"></context:component-scan>
 </beans>
