@@ -3,14 +3,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import union.pojo.Student;
 import union.service.StudentService;
-import union.service.impl.StudentServiceImp;
-import union.service.impl.StudentServiceImp2;
+//import union.service.impl.StudentServiceImp;
+//import union.service.impl.StudentServiceImp2;
 
 import java.util.List;
 
 public class TestAll {
     @Test
-    public void test(){
+    public void testSelect(){
 
         ApplicationContext app = new ClassPathXmlApplicationContext("springconfig.xml");
         StudentService studentService = (StudentService) app.getBean("studentServiceImp");
@@ -20,9 +20,9 @@ public class TestAll {
         }
     }
     @Test
-    public void testTran(){
+    public void testAdd(){
         ApplicationContext app = new ClassPathXmlApplicationContext("springconfig.xml");
-        StudentService studentService = (StudentService) app.getBean("studentServiceImp2");
+        StudentService studentService = (StudentService) app.getBean("studentServiceImp");
         int xiao = studentService.addStudent(new Student(null, "小菜", 2));
     }
 

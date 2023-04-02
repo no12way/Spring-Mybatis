@@ -1,7 +1,7 @@
 package union.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+//import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +13,7 @@ import java.util.List;
 @Service("studentServiceImp")
 public class StudentServiceImp implements StudentService {
     @Autowired
-    @Qualifier("studentMapper")
+//    @Qualifier("studentMapper")
     private StudentMapper studentMapper;
 
     public StudentMapper getStudentMapper() {
@@ -33,8 +33,8 @@ public class StudentServiceImp implements StudentService {
     @Override
 //    @Transactional(propagation = Propagation.REQUIRED)
     public List<Student> queryStudent() {
-       Integer integer = null;
-       integer.toString();
+//       Integer integer = null;
+//       integer.toString();
         List<Student> students = studentMapper.selectStudent();
         return students;
     }
